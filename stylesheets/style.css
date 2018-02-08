@@ -4,11 +4,9 @@ h3{
 
 #toDo {
 	height: 50%;
-	border: 1px solid red;
 	grid-column:2/3;
 	grid-row: 1;
 }
-
 
 .container {
 	display: grid;
@@ -16,5 +14,24 @@ h3{
 }
 
 .done{
+	width: fit-content;
 	text-decoration: line-through;
+	text-decoration-color: red;
+	background-color: lightblue;
 }
+
+.buttons{
+	opacity: 0;
+	display: inline-block;
+}
+
+#toDo {
+	overflow: hidden;
+}
+
+
+
+
+
+
+
