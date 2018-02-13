@@ -18,7 +18,7 @@ function displayTodo() {
 
 
 	for(i=0;i<toDo.length;i++){
-		toDo[i] ? newLI.innerHTML = "<div>"+"<a>" + toDo[i] + "</a>" + " <button type='button' id= '" +  i + "' onclick='expand(event)'> &#10562; </button>" + "<div class='buttons' id= '" +  i + "'> </div> </div>" : console.log("nonething there");
+		toDo[i] ? newLI.innerHTML = "<div class='liContainer'>"+  toDo[i] + " <button type='button' id= '" +  i + "' onclick='expand(event)'> &#10562; </button>" + "<div class='buttons' id= '" +  i + "'> </div> </div><div class='notes'></div>" : console.log("nonething there");
 	}
 	
 	if(item.value !== ""){
@@ -34,11 +34,26 @@ function deleteTodo(ev) {
 
 function finishTodo(ev) {
 
-	ev.srcElement.parentNode.parentNode.className== "done"? ev.srcElement.parentNode.parentNode.className= "" : ev.srcElement.parentNode.parentNode.className= "done"
+	ev.srcElement.parentNode.parentNode.className == "done"? ev.srcElement.parentNode.parentNode.className= "" : ev.srcElement.parentNode.parentNode.className= "done"
 }
 
 function expand(ev) {
 	var box = ev.srcElement.nextSibling;
 
-	box.innerHTML == " " ? box.innerHTML = "<button type='button' id= '" +  box.id + "' onclick='deleteTodo(event)''>x</button>" + " <button type='button' id= '" +  box.id + "' onclick='finishTodo(event)''>&#10004</button>" + "<button type='button' id= '" +  box.id + "' onclick='deleteTodo(event)''>x</button>" : box.innerHTML = " " ;
+	box.innerHTML == " " ? box.innerHTML = "<button type='button' id= '" +  box.id + "' onclick='deleteTodo(event)''>x</button>" + " <button type='button' id= '" +  box.id + "' onclick='finishTodo(event)''>&#10004</button>" + "<button type='button' id= '" +  box.id + "' onclick='info(event)''>&#10597</button>" : box.innerHTML = " " ;
+}
+
+
+function info(ev) {
+
+ var notes = document.getElementsByClassName('notes'),
+ 	 ul = document.createElement('ul');
+ 	 li = document.createElement('li')
+ 	 li.innerHTML ="<p>test</p>"
+
+ 	 ul.append(li)
+ 	 notes.innerHTML = ul.toString();
+
+ 	 console.log(ul)
+ 	
 }
