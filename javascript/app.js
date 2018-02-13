@@ -18,7 +18,7 @@ function displayTodo() {
 
 
 	for(i=0;i<toDo.length;i++){
-		toDo[i] ? newLI.innerHTML = "<div>"+"<a>" + toDo[i] + "</a>" + " <button type='button' id= '" +  i + "' onclick='expand(event)'> &#10562; </button>" + "<div class='buttons'> <button type='button' id= '" +  i + "' onclick='deleteTodo(event)''>x</button>" + " <button type='button' id= '" +  i + "' onclick='finishTodo(event)''>&#10004</button> </div> </div>" : console.log("nonething there");
+		toDo[i] ? newLI.innerHTML = "<div>"+"<a>" + toDo[i] + "</a>" + " <button type='button' id= '" +  i + "' onclick='expand(event)'> &#10562; </button>" + "<div class='buttons' id= '" +  i + "'>  </div> </div>" : console.log("nonething there");
 	}
 	
 	if(item.value !== ""){
@@ -40,6 +40,5 @@ function finishTodo(ev) {
 function expand(ev) {
 	var box = ev.srcElement.nextSibling;
 
-	box.style.opacity == 1 ? box.style = "opacity:0"  : box.style = "opacity:1"
-
+	box.innerHTML == " " ? box.innerHTML = "<button type='button' id= '" +  box.id + "' onclick='deleteTodo(event)''>x</button>" + " <button type='button' id= '" +  box.id + "' onclick='finishTodo(event)''>&#10004</button>" : box.innerHTML = " " 
 }
