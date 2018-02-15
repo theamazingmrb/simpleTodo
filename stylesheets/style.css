@@ -21,7 +21,7 @@ h3{
 }
 
 .buttons{
-	/*opacity: 0;*/
+	/*visibility: hidden;*/
 	display: inline-block;
 }
 
