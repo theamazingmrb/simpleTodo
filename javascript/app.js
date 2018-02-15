@@ -72,6 +72,12 @@ function deleteTodo(ev) {
 	list.removeChild(del)
 }
 
+
+function finishTodo(ev) {
+
+	ev.srcElement.parentNode.parentNode.className == "done"? ev.srcElement.parentNode.parentNode.className= "" : ev.srcElement.parentNode.parentNode.className= "done"
+}
+
 	
 
 function expand(ev) {
