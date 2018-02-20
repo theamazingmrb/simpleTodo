@@ -44,7 +44,7 @@ function deleteTodo(ev) {
 	// text content array
 	var deleteMe = del.textContent.split(" ")
 	var holder = [];
-	console.log(del)
+
 //   trims dom li text content string down to just the text
 	cutString(deleteMe,holder)
 
@@ -69,23 +69,26 @@ function cutString(array,holder) {
 	}
 }
 
-
+//finish that todo
 function finishTodo(ev) {
 
 	ev.srcElement.parentNode.parentNode.className == "done"? ev.srcElement.parentNode.parentNode.className= "" : ev.srcElement.parentNode.parentNode.className= "done"
 }
 
+// button to show the delete done and notes button
 function expand(ev) {
 	var box = ev.srcElement.nextSibling;
 	box.innerHTML == " " ? box.innerHTML = "<button type='button' id= '" +  box.id + "' onclick='deleteTodo(event)''>x</button>" + " <button type='button' id= '" +  box.id + "' onclick='finishTodo(event)''>&#10004</button>" + "<button type='button' id= '" +  box.id + "' onclick='info(event)''>&#10597</button>" : box.innerHTML = " " ;
 
 }
  
+// buton to display the input box and notes 
 function info(ev) {
  var notes = document.getElementsByClassName('notes')[ev.srcElement.id];
   
     if(notes.innerHTML == " "){
-     notes.innerHTML = "<input id='notes"+ ev.srcElement.id +"'>" + "<button onclick=addNote(event)>poop here</button><br> <ul id='addedNotes" + ev.srcElement.id + "'><ul>"
+     notes.innerHTML = "<input id='notes"+ ev.srcElement.id +"'>" + "<button onclick=addNote(event)>Submit</button><br> <ul id='addedNotes" + ev.srcElement.id + "'><ul>"
+      redisplayNotes(ev.srcElement.id)
  	}else{
  		notes.innerHTML = " ";
  	}
@@ -94,47 +97,63 @@ function info(ev) {
 function addNote(ev){
 	//input from drop down add notes menu
 	var notesI = ev.srcElement.parentNode.firstChild.value;
-	var notesID = ev.srcElement.parentNode.firstChild.id;
+	let notesID = ev.srcElement.parentNode.firstChild.id;
 	// parent todo div
 	var toDo = ev.srcElement.parentNode.parentNode.firstChild;
 	// parent todo div split to parse text
 	var compare = toDo.textContent.split(" ");
 	// holder for custom cut string function
-	var holder = [];
+	var holder2 = [];
 
-	cutString(compare,holder)
+	cutString(compare,holder2)
 
-	console.log(notesID)
+	
 
 	for(i=0; i<toDos.length; i++) {
-		if(holder.join("") == toDos[i].item){
+
+
+	// compares holder to cut string to verify note position in array
+		if(holder2.join(" ") == toDos[i].item){
 			toDos[i].notes.push(notesI)
 		}
 
-
+	}
+		//grabs id number for display notes position
 		var spot = notesID.split("").filter(function(spot) {
 			if(spot >= 0){
 				return spot
 			}
 		})
-		console.log(spot)
 
 		displayNotes(notesI,parseInt(spot))
+		//resets input on display call
+		ev.srcElement.parentNode.firstChild.value = ""
 
-	}
 }
 
 
 function displayNotes(note,notesID) {
 	var newLI = document.createElement('li');
 	var note = note;
-	var notesID = notesID;
-	var noteContainer = document.getElementById('addedNotes' + notesID);
+	let notesNum = notesID;
+	var noteContainer = document.getElementById('addedNotes' + notesNum);
 
 	for(i=0;i<toDos.length;i++){
 
 		toDos[i].notes ? newLI.innerHTML = note : console.log("fail") ;
 		noteContainer.append(newLI)
 	}
-	
+}
+
+function redisplayNotes(IdNum){
+
+
+	toDos[IdNum].notes.forEach(function(note){
+		
+	var anotherLI = document.createElement('li');
+	var noteContainer = document.getElementById('addedNotes' + IdNum);
+
+		anotherLI.innerHTML = note
+		noteContainer.append(anotherLI)
+	})
 }
