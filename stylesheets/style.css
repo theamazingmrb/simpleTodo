@@ -11,7 +11,7 @@ h3{
 	width: fit-content;
 	text-decoration: line-through;
 	text-decoration-color: red;
-	background-color: lightblue;
+	background-color: dodgerblue;
 }
 
 .buttons{
@@ -45,5 +45,20 @@ h2{
 	overflow: hidden;
 }
 
+#simpleInstructions p{
+	margin: 0;
+}
 
+#name{
+	text-align: right;
+}
+
+.column {
+	float:left;
+	width: 50%;
+}
+
+.clear{
+	clear:both;
+}
 
